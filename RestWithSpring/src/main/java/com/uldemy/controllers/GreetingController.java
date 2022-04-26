@@ -1,9 +1,7 @@
-package com.uldemy;
+package com.uldemy.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.uldemy.Greetings;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -20,5 +18,5 @@ public class GreetingController {
         return new Greetings(counter.incrementAndGet(), String.format(template, name));
     }
 
-    
+
 }
