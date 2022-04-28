@@ -1,6 +1,6 @@
 package com.uldemy.controllers;
 
-import com.uldemy.Greetings;
+import com.uldemy.model.Greetings;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;

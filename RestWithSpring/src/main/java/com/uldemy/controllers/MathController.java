@@ -1,8 +1,6 @@
 package com.uldemy.controllers;
 
-import com.uldemy.exceptions.UnsuportedMathException;
 import com.uldemy.services.MathService;
-import com.uldemy.utils.MathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
