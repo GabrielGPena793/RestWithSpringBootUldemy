@@ -18,5 +18,4 @@ public class GreetingController {
         return new Greetings(counter.incrementAndGet(), String.format(template, name));
     }
 
-
 }
