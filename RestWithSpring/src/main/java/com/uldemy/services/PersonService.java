@@ -2,9 +2,11 @@ package com.uldemy.services;
 
 import com.uldemy.converter.DozerConverter;
 import com.uldemy.dto.PersonDTO;
+import com.uldemy.dto.V2.PersonDTOV2;
 import com.uldemy.exceptions.ResourceNotFoundException;
 import com.uldemy.model.Person;
 import com.uldemy.repositories.PersonRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,15 @@ public class PersonService {
 
         return DozerConverter.parseObject(personRepository.save(personEntity), PersonDTO.class);
     }
+
+    //Simulando um troca de versão de rotas
+    public PersonDTOV2 createV2(PersonDTOV2 personDTOV2){
+        Person person = new Person();
+        BeanUtils.copyProperties(personDTOV2, person);
+        BeanUtils.copyProperties(personRepository.save(person), personDTOV2);
+        return personDTOV2;
+    }
+    //---------
 
     public PersonDTO update(PersonDTO personDTO){
         var entity = personRepository.findById(personDTO.getId())
