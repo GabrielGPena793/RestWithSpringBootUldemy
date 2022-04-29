@@ -1,5 +1,7 @@
 package com.uldemy.services;
 
+import com.uldemy.converter.DozerConverter;
+import com.uldemy.dto.PersonDTO;
 import com.uldemy.exceptions.ResourceNotFoundException;
 import com.uldemy.model.Person;
 import com.uldemy.repositories.PersonRepository;
@@ -21,26 +23,31 @@ public class PersonService {
 
     }
 
-    public Person create(Person person){
-        return personRepository.save(person);
+    public PersonDTO create(PersonDTO personDTO){
+        var personEntity = DozerConverter.parseObject(personDTO, Person.class);
+
+        return DozerConverter.parseObject(personRepository.save(personEntity), PersonDTO.class);
     }
 
-    public Person update(Person person){
-        Person entity = personRepository.findById(person.getId())
+    public PersonDTO update(PersonDTO personDTO){
+        var entity = personRepository.findById(personDTO.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
-        entity.setFirstName(person.getFirstName());
-        entity.setLastName(person.getLastName());
-        entity.setAddress(person.getAddress());
-        entity.setGender(person.getGender());
-        return personRepository.save(entity);
+        entity.setFirstName(personDTO.getFirstName());
+        entity.setLastName(personDTO.getLastName());
+        entity.setAddress(personDTO.getAddress());
+        entity.setGender(personDTO.getGender());
+
+        return DozerConverter.parseObject(personRepository.save(entity), PersonDTO.class);
     }
-    public Person findById(Long id){
-        return personRepository.findById(id)
+    public PersonDTO findById(Long id){
+        var person = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+
+        return DozerConverter.parseObject(person, PersonDTO.class);
     }
 
-    public List<Person> findAll(){
-        return personRepository.findAll();
+    public List<PersonDTO> findAll(){
+        return DozerConverter.parseListObjects(personRepository.findAll(), PersonDTO.class);
     }
 
 

@@ -1,6 +1,6 @@
 package com.uldemy.controllers;
 
-import com.uldemy.model.Person;
+import com.uldemy.dto.PersonDTO;
 import com.uldemy.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,24 +16,24 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping
-    public List<Person> findAll(){
+    public List<PersonDTO> findAll(){
         return personService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Person findById(@PathVariable Long id){
+    public PersonDTO findById(@PathVariable Long id){
         return personService.findById(id);
     }
 
 
     @PostMapping
-    public Person create(@RequestBody Person person){
-        return personService.create(person);
+    public PersonDTO create(@RequestBody PersonDTO personDTO){
+        return personService.create(personDTO);
     }
 
     @PutMapping
-    public Person update(@RequestBody Person person){
-        return personService.update(person);
+    public PersonDTO update(@RequestBody PersonDTO personDTO){
+        return personService.update(personDTO);
     }
 
 
