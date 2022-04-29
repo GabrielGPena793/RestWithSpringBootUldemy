@@ -1,53 +1,47 @@
 package com.uldemy.services;
 
+import com.uldemy.exceptions.ResourceNotFoundException;
 import com.uldemy.model.Person;
+import com.uldemy.repositories.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class PersonService {
 
-    private final AtomicLong counter = new AtomicLong();
+    @Autowired
+    PersonRepository personRepository;
 
-    public void delete(String id){
+    public void delete(Long id){
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+        personRepository.delete(person);
+
     }
 
     public Person create(Person person){
-        return person;
+        return personRepository.save(person);
     }
 
     public Person update(Person person){
-        return person;
+        Person entity = personRepository.findById(person.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
+        entity.setFirstName(person.getFirstName());
+        entity.setLastName(person.getLastName());
+        entity.setAddress(person.getAddress());
+        entity.setGender(person.getGender());
+        return personRepository.save(entity);
     }
-    public Person findById(String id){
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Gabriel");
-        person.setLastName("Gomes");
-        person.setAddress("Rua do vento");
-        person.setGender("Masculino");
-        return person;
+    public Person findById(Long id){
+        return personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
     }
 
     public List<Person> findAll(){
-        List<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 8; i++){
-            Person person = mockPersons(i);
-            persons.add(person);
-        }
-        return persons;
+        return personRepository.findAll();
     }
 
-    public Person mockPersons(int i){
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Person name " + i);
-        person.setLastName("Last name " + i);
-        person.setAddress("Some address in Brazil " + i);
-        person.setGender(i % 2 == 0 ? "Masculino" : "Feminino" );
-        return person;
-    }
+
 }
