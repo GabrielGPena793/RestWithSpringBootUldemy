@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class PersonDTO {
 
     private Long id;
-    @JsonProperty("first_name")
+    @JsonProperty("first_name")  // troca o nome da propriedade no Json
     private String firstName;
-    @JsonProperty("last_name")
+    @JsonProperty("last_name")   // troca o nome da propriedade no Json
     private String lastName;
     private String address;
-    @JsonIgnore
+    @JsonIgnore                  // Ignora a Propriedade no Json
     private String gender;
 
     public PersonDTO() {
