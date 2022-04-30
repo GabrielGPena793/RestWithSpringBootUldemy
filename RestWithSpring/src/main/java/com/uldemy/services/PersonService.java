@@ -1,8 +1,8 @@
 package com.uldemy.services;
 
 import com.uldemy.converter.DozerConverter;
-import com.uldemy.dto.PersonDTO;
 import com.uldemy.dto.V2.PersonDTOV2;
+import com.uldemy.dto.v1.PersonDTO;
 import com.uldemy.exceptions.ResourceNotFoundException;
 import com.uldemy.model.Person;
 import com.uldemy.repositories.PersonRepository;

@@ -1,7 +1,8 @@
 package com.uldemy.converter;
 
 import com.uldemy.converter.mocks.MockPerson;
-import com.uldemy.dto.PersonDTO;
+import com.uldemy.dto.v1.PersonDTO;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

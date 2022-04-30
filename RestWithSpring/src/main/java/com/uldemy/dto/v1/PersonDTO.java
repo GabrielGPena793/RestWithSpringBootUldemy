@@ -1,13 +1,22 @@
-package com.uldemy.dto;
+package com.uldemy.dto.v1;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+//anotação que troca a ordem de apresentação no JSON
+@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
 public class PersonDTO {
 
     private Long id;
+    @JsonProperty("first_name")
     private String firstName;
+    @JsonProperty("last_name")
     private String lastName;
     private String address;
+    @JsonIgnore
     private String gender;
 
     public PersonDTO() {

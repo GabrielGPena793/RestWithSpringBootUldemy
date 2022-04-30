@@ -1,6 +1,6 @@
 package com.uldemy.converter.mocks;
 
-import com.uldemy.dto.PersonDTO;
+import com.uldemy.dto.v1.PersonDTO;
 import com.uldemy.model.Person;
 
 import java.util.ArrayList;
