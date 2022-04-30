@@ -16,29 +16,31 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping
+    @GetMapping(produces = {"application/json","application/xml", "application/x-yaml"})
     public List<PersonDTO> findAll(){
         return personService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {"application/json","application/xml", "application/x-yaml"})
     public PersonDTO findById(@PathVariable Long id){
         return personService.findById(id);
     }
 
 
-    @PostMapping
+    @PostMapping(produces = {"application/json","application/xml", "application/x-yaml"},
+            consumes = {"application/json","application/xml", "application/x-yaml"})
     public PersonDTO create(@RequestBody PersonDTO personDTO){
         return personService.create(personDTO);
     }
-
-    //Simulando um troca de versão de rotas ====
-    @PostMapping("/v2")
-    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 personDTOV2){
-        return personService.createV2(personDTOV2);
-    }
-    //--------
-    @PutMapping
+//
+//    //Simulando um troca de versão de rotas ====
+//    @PostMapping("/v2")
+//    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 personDTOV2){
+//        return personService.createV2(personDTOV2);
+//    }
+//    //--------
+    @PutMapping(produces = {"application/json","application/xml", "application/x-yaml"},
+            consumes = {"application/json","application/xml", "application/x-yaml"})
     public PersonDTO update(@RequestBody PersonDTO personDTO){
         return personService.update(personDTO);
     }

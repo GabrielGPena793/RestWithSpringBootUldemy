@@ -7,16 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 //anotação que troca a ordem de apresentação no JSON
-@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
 public class PersonDTO {
 
     private Long id;
-    @JsonProperty("first_name")  // troca o nome da propriedade no JSON
     private String firstName;
-    @JsonProperty("last_name")   // troca o nome da propriedade no JSON
     private String lastName;
     private String address;
-    @JsonIgnore                  // Ignora a Propriedade no JSON
     private String gender;
 
     public PersonDTO() {
