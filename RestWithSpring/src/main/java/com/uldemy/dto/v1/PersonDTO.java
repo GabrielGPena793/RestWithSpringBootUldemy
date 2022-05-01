@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.RepresentationModel;
 
-//anotação que troca a ordem de apresentação no JSON
 public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
     private Long id;
