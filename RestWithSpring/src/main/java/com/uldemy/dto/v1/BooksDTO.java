@@ -1,7 +1,9 @@
 package com.uldemy.dto.v1;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.hateoas.RepresentationModel;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -10,6 +12,8 @@ public class BooksDTO extends RepresentationModel<BooksDTO> implements Serializa
 
     private Long id;
     private String author;
+    @NotEmpty(message = "This date is necessary")
+    @Schema(description = "this is book's date", example = "2022-05-01T21:07:48.657Z")
     private Date launchDate;
     private Double price;
     private String title;

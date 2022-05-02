@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
         converters.add(new YamlJackson2HttpMessageConverter());
     }
 
-    //configuração para rebever e enviar mais de um tipo de arquivo, colocando no header( Accept = "application/xml" ou json, etc)
+    //configuração para rebecer e enviar mais de um tipo de arquivo, colocando no header( Accept = "application/xml" ou json, etc)
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer){
         configurer.favorParameter(false)
