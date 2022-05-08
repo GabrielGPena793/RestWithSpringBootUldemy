@@ -5,13 +5,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements UserDetails, Serializable {
 
     @Id
@@ -35,7 +33,16 @@ public class User implements UserDetails, Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_permission", joinColumns = {
             @JoinColumn(name = "id_user")}, inverseJoinColumns = {@JoinColumn(name = "id_permission")})
-    private List<Permission> permissions;
+    private Set<Permission> permissions;
+
+    public User() {
+    }
+
+    public User(String username, String password, Set<GrantedAuthority> grantList) {
+        this.username = username;
+        this.password = password;
+        this.permissions = grantList.stream().map(x -> new Permission(x.getAuthority())).collect(Collectors.toSet());
+    }
 
     public List<String> getRoles(){
         List<String> roles = new ArrayList<>();
@@ -45,7 +52,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.permissions;
+        return new ArrayList<>();
     }
 
     @Override
@@ -60,17 +67,17 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.accountNonExpired;
+        return true; //melhoria está mococado o valor
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.accountNonLocked;
+        return true; //melhoria está mococado o valor
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.credentialsNonExpired;
+        return true; //melhoria está mococado o valor
     }
 
     @Override
@@ -134,11 +141,11 @@ public class User implements UserDetails, Serializable {
         this.enabled = enabled;
     }
 
-    public List<Permission> getPermissions() {
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
     }
 

@@ -16,6 +16,13 @@ public class Permission implements GrantedAuthority, Serializable {
     @Column(name = "description")
     private String description;
 
+    public Permission(String authority) {
+        this.description = authority;
+    }
+
+    public Permission() {
+    }
+
     @Override
     public String getAuthority() {
         return this.description;
